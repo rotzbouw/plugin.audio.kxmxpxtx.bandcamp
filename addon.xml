@@ -10,14 +10,16 @@
         <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">https://bandcamp.com</summary>
+        <summary lang="en_GB">Use Bandcamp to discover new music and browse your collection.</summary>
         <license>MIT</license>
-        <description lang="en_GB">Discover new artists and browse your collection</description>
+        <description lang="en_GB">Bandcamp is an online record store and music community where passionate fans discover, connect with, and directly support the artists they love. Visit https://bandcamp.com to support your favourite bands!</description>
         <platform>all</platform>
-        <news>v0.4.2+matrix.1 (2022-10-23)
+        <source>https://github.com/molzy/plugin.audio.kxmxpxtx.bandcamp</source>
+        <news>v0.4.2+matrix.1 (2022-10-27)
  - Added image quality settings and band fanart
  - Moved grouping by artist to submenu
  - Added icons to main menu
+ - Add German and Dutch translations
         </news>
         <assets>
             <icon>icon.png</icon>

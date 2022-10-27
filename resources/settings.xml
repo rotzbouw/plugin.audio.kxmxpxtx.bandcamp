@@ -3,7 +3,7 @@
 	<section id="plugin.audio.kxmxpxtx.bandcamp">
 		<category id="general" label="30001" help="30014">
 			<group id="1">
-				<setting id="username" type="string" label="30002" help="30015">
+				<setting id="username" type="string" label="30002" help="30104">
 					<level>0</level>
 					<default/>
 					<constraints>
