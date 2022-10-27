@@ -95,6 +95,10 @@ msgctxt "#30105"
 msgid "Wishlist"
 msgstr ""
 
+msgctxt "#30106"
+msgid "Group by Artist"
+msgstr ""
+
 # GUI - Discover
 msgctxt "#30201"
 msgid "All"

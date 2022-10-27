@@ -60,10 +60,21 @@ class ListItems:
         items.append((url, li, True))
         return items
 
-    def get_album_items(self, albums, band=None):
+    def get_album_items(self, albums, band=None, group_by_artist=False):
         items = []
+        if group_by_artist:
+            li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30106))
+            url = self._build_url({'mode': group_by_artist + '_band'})
+            items.append((url, li, True))
         for album in albums:
-            li = xbmcgui.ListItem(label=album.album_name)
+            if band:
+                album_title = '{} - {}'.format(band.band_name, album.album_name)
+            elif album.band:
+                album_title = '{} - {}'.format(album.band.band_name, album.album_name)
+            else:
+                album_title = album.album_name
+
+            li = xbmcgui.ListItem(label=album_title)
             url = self._build_url({'mode': 'list_songs', 'album_id': album.album_id, 'item_type': album.item_type})
             band_art = band.get_art_img(quality=self._band_quality()) if band else None
             album_art = album.get_art_img(quality=self._album_quality())
@@ -120,7 +131,7 @@ class ListItems:
         items = []
         mode = 'list_albums'
         if from_wishlist:
-            mode = 'list_wishlist_albums'
+            mode = 'list_wishlist_band_albums'
         elif from_search:
             mode = 'list_search_albums'
         for band in bands:
