@@ -17,6 +17,7 @@
         <news>v0.4.2+matrix.1 (2022-10-23)
  - Added image quality settings and band fanart
  - Moved grouping by artist to submenu
+ - Added icons to main menu
         </news>
         <assets>
             <icon>icon.png</icon>

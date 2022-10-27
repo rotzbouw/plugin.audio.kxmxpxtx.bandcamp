@@ -38,24 +38,29 @@ class ListItems:
         items = []
         # discover menu
         li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30101))
+        li.setArt({'icon': 'DefaultMusicSources.png'})
         url = self._build_url({'mode': 'list_discover'})
         items.append((url, li, True))
         # collection menu
         # don't add if not configured
         if username == "":
             li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30104))
+            li.setArt({'icon': 'DefaultAddonService.png'})
             url = self._build_url({'mode': 'settings'})
             items.append((url, li, True))
         else:
             li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30102))
+            li.setArt({'icon': 'DefaultMusicAlbums.png'})
             url = self._build_url({'mode': 'list_collection'})
             items.append((url, li, True))
 
             li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30105))
+            li.setArt({'icon': 'DefaultMusicRecentlyAdded.png'})
             url = self._build_url({'mode': 'list_wishlist'})
             items.append((url, li, True))
         # search
         li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30103))
+        li.setArt({'icon': 'DefaultMusicSearch.png'})
         url = self._build_url({'mode': 'search', 'action': 'new'})
         items.append((url, li, True))
         return items
@@ -64,6 +69,7 @@ class ListItems:
         items = []
         if group_by_artist:
             li = xbmcgui.ListItem(label=self.addon.getLocalizedString(30106))
+            li.setArt({'icon': 'DefaultMusicArtists.png'})
             url = self._build_url({'mode': group_by_artist + '_band'})
             items.append((url, li, True))
         for album in albums:
