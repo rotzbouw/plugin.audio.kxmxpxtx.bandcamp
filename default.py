@@ -24,7 +24,7 @@ try:
     import StorageServer
 except:
     from resources.lib.cache import storageserverdummy as StorageServer
-cache = StorageServer.StorageServer("plugin.audio.kxmxpxtx.bandcamp", 24)  # (Your plugin name, Cache time in hours)
+cache = StorageServer.StorageServer('plugin.audio.kxmxpxtx.bandcamp', 24)  # (Your plugin name, Cache time in hours)
 
 
 def build_main_menu():
@@ -109,7 +109,7 @@ def main():
     if mode is None:
         build_main_menu()
     elif mode[0] == 'stream':
-        play_song(args['url'][0])
+        play_song(args.get('url', [''])[0])
     elif mode[0] == 'list_discover':
         build_genre_list()
     elif mode[0] == 'list_collection':
@@ -122,32 +122,32 @@ def main():
         build_band_list(bandcamp.get_wishlist(bandcamp.get_fan_id()), from_wishlist=True)
     elif mode[0] == 'list_wishlist_band_albums':
         bands = bandcamp.get_wishlist(bandcamp.get_fan_id())
-        band, albums = bandcamp.get_band(args.get('band_id', None)[0])
+        band, albums = bandcamp.get_band(args.get('band_id', [''])[0])
         build_album_list(bands[band], band)
     elif mode[0] == 'list_search_albums':
-        band, albums = bandcamp.get_band(args.get('band_id', None)[0])
+        band, albums = bandcamp.get_band(args.get('band_id', [''])[0])
         build_album_list(albums, band)
     elif mode[0] == 'list_albums':
         bands = bandcamp.get_collection(bandcamp.get_fan_id())
-        band, albums = bandcamp.get_band(args.get('band_id', None)[0])
+        band, albums = bandcamp.get_band(args.get('band_id', [''])[0])
         build_album_list(bands[band], band)
     elif mode[0] == 'list_songs':
-        album_id = args.get('album_id', None)[0]
-        item_type = args.get('item_type', None)[0]
+        album_id = args.get('album_id', [''])[0]
+        item_type = args.get('item_type', [''])[0]
         build_song_list(*bandcamp.get_album(album_id=album_id, item_type=item_type))
     elif mode[0] == 'list_subgenre':
-        genre = args.get('category', None)[0]
+        genre = args.get('category', [''])[0]
         build_subgenre_list(genre)
     elif mode[0] == 'list_subgenre_songs':
-        genre = args.get('category', None)[0]
+        genre = args.get('category', [''])[0]
         subgenre = args.get('subcategory', None)[0]
         slices = []
         if addon.getSetting('slice_top') == 'true':
-            slices.append("top")
+            slices.append('top')
         if addon.getSetting('slice_new') == 'true':
-            slices.append("new")
+            slices.append('new')
         if addon.getSetting('slice_rec') == 'true':
-            slices.append("rec")
+            slices.append('rec')
         discover_dict = {}
         for slice in slices:
             discover_dict.update(bandcamp.discover(genre, subgenre, slice))
@@ -156,21 +156,21 @@ def main():
         discover_dict = dict(shuffle_list)
         build_featured_list(discover_dict)
     elif mode[0] == 'search':
-        action = args.get("action", None)[0]
-        query = args.get("query", [""])[0]
-        if action == "new":
+        action = args.get('action', [''])[0]
+        query = args.get('query', [''])[0]
+        if action == 'new':
             query = xbmcgui.Dialog().input(addon.getLocalizedString(30103))
         if query:
             search(query)
     elif mode[0] == 'url':
-        url = args.get("url", None)[0]
+        url = args.get('url', [''])[0]
         build_song_list(*bandcamp.get_album_by_url(url), autoplay=True)
     elif mode[0] == 'settings':
         addon.openSettings()
 
 
 if __name__ == '__main__':
-    xbmc.log("sys.argv:" + str(sys.argv), xbmc.LOGDEBUG)
+    xbmc.log('sys.argv:' + str(sys.argv), xbmc.LOGDEBUG)
     addon = xbmcaddon.Addon()
     list_items = ListItems(addon)
     username = addon.getSetting('username')
