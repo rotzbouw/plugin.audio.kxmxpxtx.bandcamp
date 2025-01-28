@@ -239,8 +239,9 @@ class Bandcamp:
     def search(self, query):
         if PY2:
             query = query.decode('utf-8')
-        url = "https://bandcamp.com/api/fuzzysearch/1/autocomplete?q={query}".format(query=quote_plus(query))
-        request = req(url)
+        url = "https://bandcamp.com/api/bcsearch_public_api/1/autocomplete_elastic"
+        body = '{{"search_text": "{query}", "search_filter": "", "full_page": "false"}}'.format(query=query)
+        request = urlopen(Request(url, data=body.encode("utf-8"), headers={'Content-Type': 'application/json; charset=UTF-8'}), timeout=5).read().decode()
         results = json.loads(request)['auto']['results']
         items = []
         for result in results:
